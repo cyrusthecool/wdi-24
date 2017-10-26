@@ -34,6 +34,27 @@ for (let i = 0; i < recipe.ingredients.length; i++) {
 // - Iterate through the array of books. For each book, log the book title and book author like so: "The Hobbit by J.R.R. Tolkien".
 // - Now use an if/else statement to change the output depending on whether you read it yet or not. If you read it, log a string like 'You already read "The Hobbit" by J.R.R. Tolkien', and if not, log a string like 'You still need to read "The Lord of the Rings" by J.R.R. Tolkien.'
 //
+
+const library = [
+  {title: 'Finding the Gone', author: 'Bill Porter', alreadyRead: true},
+  {title: 'I Am A Strange Loop', author: 'Douglas Hofstadter', alreadyRead: false},
+  {title: 'Murphy', author: 'Samuel Beckett', alreadyRead: false}
+];
+
+for (let i = 0; i < library.length; i++) {
+  let book = library[i];
+  let bookInfo = `${ book.title } by ${ book.author }`;
+
+  if (book.alreadyRead) {
+    bookInfo = 'You already read ' + bookInfo;
+  } else {
+    bookInfo = 'You still need to read ' + bookInfo;
+  }
+
+  console.log( bookInfo );
+}
+
+
 // ## The Movie Database
 //
 // It's like IMDB, but much much smaller!
@@ -42,3 +63,16 @@ for (let i = 0; i < recipe.ingredients.length; i++) {
 // - Create a function to print out the movie information like so: "Puff the Magic Dragon lasts for 30 minutes. Stars: Puff, Jackie, Living Sneezes."
 //
 //
+
+const movie = {
+  title: 'O Brother, Where Art Thou?',
+  duration: 107,
+  stars: ['George Clooney', 'John Tuturo', 'John Goodman', 'Gillian Welch']
+};
+
+const movieInfo = function (m) {
+  const info = `${ m.title } lasts for ${ m.duration } minutes. Stars: ${ m.stars.join(', ') }.`;
+  console.log( info );
+};
+
+movieInfo( movie );
