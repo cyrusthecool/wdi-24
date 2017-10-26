@@ -67,7 +67,7 @@ for (let i = 0; i < library.length; i++) {
 const movie = {
   title: 'O Brother, Where Art Thou?',
   duration: 107,
-  stars: ['George Clooney', 'John Tuturo', 'John Goodman', 'Gillian Welch']
+  stars: ['George Clooney', 'John Turturro', 'John Goodman', 'Gillian Welch']
 };
 
 const movieInfo = function (m) {
