@@ -36,7 +36,7 @@ for (let i = 0; i < recipe.ingredients.length; i++) {
 //
 
 const library = [
-  {title: 'Finding the Gone', author: 'Bill Porter', alreadyRead: true},
+  {title: 'Finding Them Gone', author: 'Bill Porter', alreadyRead: true},
   {title: 'I Am A Strange Loop', author: 'Douglas Hofstadter', alreadyRead: false},
   {title: 'Murphy', author: 'Samuel Beckett', alreadyRead: false}
 ];
