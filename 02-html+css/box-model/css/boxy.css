@@ -1,0 +1,17 @@
+body {
+  background-color: yellow;
+}
+
+.old {
+  /* In the old box-model, the width will be: 300 + 100 + 100 (the padding) + 1 + 1 (borders): 502 */
+  width: 300px;
+  padding: 100px;
+  border: 1px solid black;
+}
+
+.new {
+  box-sizing: border-box;
+  width: 300px;
+  padding: 100px;
+  border: 1px solid black;
+}
