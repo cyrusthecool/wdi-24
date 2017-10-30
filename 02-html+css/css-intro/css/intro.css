@@ -1,0 +1,34 @@
+/*
+
+selector {
+  someProperty: some value;
+  someOtherProperty: other value;
+}
+
+*/
+
+body {
+  background-color: limegreen;
+}
+
+p {
+  font-style: italic;
+}
+
+/* Select multiple tagnames at once */
+h1, h2, h3 {
+  text-decoration: underline;
+}
+
+/* Selects only paragraphs with the class of intro: <p class="intro"> */
+p.intro {
+  color: pink;
+  font-style: normal;
+  font-size: 130%;
+}
+
+/* Preferred style: just a classname, no mention of the tagname */
+.fancy {
+  color: red;
+  border: 1px solid pink;
+}
