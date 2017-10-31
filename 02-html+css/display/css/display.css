@@ -25,3 +25,18 @@
 .invisible {
   visibility: hidden;
 }
+
+.spooky span {
+  color: black;
+  visibility: hidden;
+}
+
+.spooky:hover {
+  background-color: black;
+}
+
+.spooky:hover span {
+  transition: 2s all;
+  color: yellow;
+  visibility: visible;
+}
