@@ -1,0 +1,27 @@
+.box {
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+  text-align: center; /* horizontal centering */
+  line-height: 300px; /* sneaky vertical centering */
+}
+
+.block {
+  display: block; /* This is already the default for a div */
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
