@@ -73,4 +73,5 @@ p users["Jonathan"][:favorite_numbers] & users["Erik"][:favorite_numbers] & user
 # 1. How would you return an array containing all users' favorite numbers, sorted, and excluding duplicates?
 all_nums = users["Jonathan"][:favorite_numbers] + users["Erik"][:favorite_numbers] + users["Anil"][:favorite_numbers] + users["Joel"][:favorite_numbers]
 p all_nums.sort.uniq
-users.map { |name, info| info[:favorite_numbers] }.flatten.sort.uniq
+# Fancy version you can freely ignore for now
+# users.map { |name, info| info[:favorite_numbers] }.flatten.sort.uniq
