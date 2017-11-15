@@ -1,0 +1,13 @@
+body {
+  text-align: center;
+  background-image: url(../img/bg.jpg);
+  color: limegreen;
+}
+
+nav {
+  text-align: right;
+}
+
+body > * {
+  background-color: white;
+}
