@@ -9,11 +9,7 @@ end
 
 # Index: Shows all the butterflies
 get '/butterflies' do
-  db = SQLite3::Database.new 'database.sqlite3'
-  db.results_as_hash = true
-
-  @butterflies = db.execute 'SELECT * FROM butterflies'
-
+  @butterflies = query_db 'SELECT * FROM butterflies'
   erb :butterflies_index
 end
 
@@ -22,16 +18,31 @@ get '/butterflies/new' do
   erb :butterflies_new
 end
 
+# Create: Adds a new butterfly to the database
+post '/butterflies' do
+  query_db "INSERT INTO butterflies (name, family, image) VALUES ('#{ params['name'] }', '#{ params['family'] }', '#{ params['image'] }')"
+  redirect to('/butterflies') # Get request
+end
+
 # Show: Shows information for a single butterfly
 get '/butterflies/:id' do
-  # Fetch this particular butterfly from the database
+  @butterfly = query_db('SELECT * FROM butterflies WHERE id = ' + params[:id]).first
+  erb :butterflies_show
+end
+
+# Destroy: Deletes the butterfly with the provided ID from the database
+get '/butterflies/:id/delete' do
+  query_db 'DELETE FROM butterflies WHERE id = ' + params[:id]
+  redirect to('/butterflies')
+end
+
+def query_db(sql_statement)
   db = SQLite3::Database.new 'database.sqlite3'
   db.results_as_hash = true
 
-  @butterfly = db.execute 'SELECT * FROM butterflies WHERE id = ' + params[:id]
+  puts sql_statement # Optional but nice for debugging
 
-  # sqlite3 gem ALWAYS returns an array so we can pluck the single butterfly from in there.
-  @butterfly = @butterfly.first # Strip off the array
-
-  erb :butterflies_show
+  results = db.execute sql_statement
+  db.close
+  results # Implicit return
 end
