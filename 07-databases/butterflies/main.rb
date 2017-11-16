@@ -20,7 +20,7 @@ end
 
 # Create: Adds a new butterfly to the database
 post '/butterflies' do
-  query_db "INSERT INTO butterflies (name, family, image) VALUES ('#{ params['name'] }', '#{ params['family'] }', '#{ params['image'] }')"
+  query_db "INSERT INTO butterflies (name, family, image) VALUES ('#{ params[:name] }', '#{ params[:family] }', '#{ params[:image] }')"
   redirect to('/butterflies') # Get request
 end
 
