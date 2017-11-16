@@ -19,3 +19,9 @@ a {
 nav {
   text-align: right;
 }
+
+img.feature {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
