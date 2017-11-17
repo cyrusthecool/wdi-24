@@ -45,7 +45,7 @@ end
 
 # Destroy: Deletes the butterfly with the provided ID from the database
 get '/butterflies/:id/delete' do
-  query_db 'DELETE FROM butterflies WHERE id = ' + params[:id]
+  query_db 'DELETE FROM butterflies WHERE id = ' + params[:id].to_i # Sanitisation
   redirect to('/butterflies')
 end
 
