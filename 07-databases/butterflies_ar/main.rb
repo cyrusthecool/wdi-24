@@ -22,7 +22,7 @@ end
 
 # Index: Shows all the butterflies
 get '/butterflies' do
-  @butterflies = query_db 'SELECT * FROM butterflies'
+  @butterflies = Butterfly.all
   erb :butterflies_index
 end
 
@@ -33,42 +33,41 @@ end
 
 # Create: Adds a new butterfly to the database
 post '/butterflies' do
-  query_db "INSERT INTO butterflies (name, family, image) VALUES ('#{ params[:name] }', '#{ params[:family] }', '#{ params[:image] }')"
-  redirect to('/butterflies') # Get request
+  butterfly = Butterfly.new
+  butterfly.name = params[:name]
+  butterfly.family = params[:family]
+  butterfly.image = params[:image]
+  butterfly.save
+
+  redirect to("/butterflies/#{ butterfly.id }") # Show page
 end
 
 # Show: Shows information for a single butterfly
 get '/butterflies/:id' do
-  @butterfly = query_db('SELECT * FROM butterflies WHERE id = ' + params[:id]).first
+  @butterfly = Butterfly.find params[:id]
   erb :butterflies_show
 end
 
 # Edit: Shows the existing values for a single butterfly for editing.
 get '/butterflies/:id/edit' do
-  @butterfly = query_db('SELECT * FROM butterflies WHERE id = ' + params[:id]).first
+  @butterfly = Butterfly.find params[:id]
   erb :butterflies_edit
 end
 
 # Update: Updates an existing butterfly in the database with new information.
 post '/butterflies/:id' do
-  update = "UPDATE butterflies SET name='#{ params[:name] }', family='#{ params[:family] }', image='#{ params[:image] }' WHERE id = #{ params[:id] }"
-  query_db update
+  butterfly = Butterfly.find params[:id]
+  butterfly.update :name => params[:name], :family => params[:family], :image => params[:image]
   redirect to("/butterflies/#{ params[:id] }")
 end
 
 # Destroy: Deletes the butterfly with the provided ID from the database
 get '/butterflies/:id/delete' do
-  query_db 'DELETE FROM butterflies WHERE id = ' + params[:id].to_i # Sanitisation
+  butterfly = Butterfly.find params[:id]
+  butterfly.destroy
   redirect to('/butterflies')
 end
 
-def query_db(sql_statement)
-  db = SQLite3::Database.new 'database.sqlite3'
-  db.results_as_hash = true
-
-  puts sql_statement # Optional but nice for debugging
-
-  results = db.execute sql_statement
-  db.close
-  results # Implicit return
+after do
+  ActiveRecord::Base.connection.close
 end
