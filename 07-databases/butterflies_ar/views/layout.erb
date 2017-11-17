@@ -13,6 +13,13 @@
         <a href="/">Home</a>
         <a href="/butterflies">All butterflies</a>
         <a href="/butterflies/new">New butterfly</a>
+        |
+        <a href="/plants">All plants</a>
+        <a href="/plants/new">New plant</a>
+        |
+        <% @families.each do |family| %>
+          <a href="/butterflies/families/<%= family %>"><%= family %></a>
+        <% end %>
       </nav>
 
       <%= yield %>

@@ -16,6 +16,13 @@ ActiveRecord::Base.logger = Logger.new(STDERR)
 class Butterfly < ActiveRecord::Base
 end
 
+class Plant < ActiveRecord::Base
+end
+
+before do
+  @families = Butterfly.pluck(:family).uniq
+end
+
 get '/' do
   erb :home
 end
@@ -23,6 +30,11 @@ end
 # Index: Shows all the butterflies
 get '/butterflies' do
   @butterflies = Butterfly.all
+  erb :butterflies_index
+end
+
+get '/butterflies/families/:family' do
+  @butterflies = Butterfly.where :family => params[:family]
   erb :butterflies_index
 end
 
@@ -66,6 +78,46 @@ get '/butterflies/:id/delete' do
   butterfly = Butterfly.find params[:id]
   butterfly.destroy
   redirect to('/butterflies')
+end
+
+################################################################################
+get '/plants' do
+  @plants = Plant.all
+  erb :plants_index
+end
+
+get '/plants/new' do
+  erb :plants_new
+end
+
+post '/plants' do
+  plant = Plant.new
+  plant.name = params[:name]
+  plant.image = params[:image]
+  plant.save
+  redirect to("/plants/#{ plant.id }") # Show page
+end
+
+get '/plants/:id' do
+  @plant = Plant.find params[:id]
+  erb :plants_show
+end
+
+get '/plants/:id/edit' do
+  @plant = Plant.find params[:id]
+  erb :plants_edit
+end
+
+post '/plants/:id' do
+  plant = Plant.find params[:id]
+  plant.update :name => params[:name], :image => params[:image]
+  redirect to("/plants/#{ plant.id }")
+end
+
+get '/plants/:id/delete' do
+  plant = Plant.find params[:id]
+  plant.destroy
+  redirect to('/plants')
 end
 
 after do
