@@ -1,45 +1,37 @@
 require 'pry'
 
-class MarxBrother
-  # Setter
-  def name=(n)
-    @name = n
+class Actor
+  def award_speech
+    "I would like to thank my parents"
   end
 
-  # Getter
-  def name
-    @name
+  def deny_allegations
+    "I deny that completely and I was drunk and I don't remember"
   end
+end
 
-  # Setter
-  def instrument=(i)
-    @instrument = i
-  end
+class Stooge < Actor # Inheritance
+end
 
-  # Getter
-  def instrument
-    @instrument
-  end
+class MarxBrother < Actor
+  attr_accessor :name, :instrument, :vice
 
-  # Setter
-  def vice=(v)
-    @vice = v
-  end
-
-  # Getter
-  def vice
-    @vice
+  def initialize(name='Somebody Marx', instrument=nil, vice=nil)
+    @name = name
+    @instrument = instrument
+    @vice = vice
   end
 
   def biography
     "My name is #{ @name }, I play the #{ @instrument } and I enjoy #{ @vice }"
   end
+
+  def sing
+    "Everyone / Says I love you"
+  end
 end
 
-groucho = MarxBrother.new
-groucho.name = 'Groucho Julius Marx'
-groucho.instrument = 'guitar'
-groucho.vice = 'cigars'
+groucho = MarxBrother.new 'Groucho', 'guitar', 'cigars'
 
 harpo = MarxBrother.new
 harpo.name = 'Harpo Marx'
