@@ -14,9 +14,11 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Base.logger = Logger.new(STDERR)
 
 class Butterfly < ActiveRecord::Base
+  belongs_to :plant
 end
 
 class Plant < ActiveRecord::Base
+  has_many :butterflies
 end
 
 before do
@@ -49,6 +51,7 @@ post '/butterflies' do
   butterfly.name = params[:name]
   butterfly.family = params[:family]
   butterfly.image = params[:image]
+  butterfly.plant_id = params[:plant_id]
   butterfly.save
 
   redirect to("/butterflies/#{ butterfly.id }") # Show page
@@ -69,7 +72,7 @@ end
 # Update: Updates an existing butterfly in the database with new information.
 post '/butterflies/:id' do
   butterfly = Butterfly.find params[:id]
-  butterfly.update :name => params[:name], :family => params[:family], :image => params[:image]
+  butterfly.update :name => params[:name], :family => params[:family], :image => params[:image], :plant_id => params[:plant_id]
   redirect to("/butterflies/#{ params[:id] }")
 end
 
