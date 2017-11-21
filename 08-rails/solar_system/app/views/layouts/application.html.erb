@@ -9,6 +9,12 @@
   </head>
 
   <body>
+
+    <nav>
+       <%= link_to 'All planets', root_path %>
+       <%= link_to 'New planets', planets_new_path %>
+    </nav>
+
     <%= yield %>
   </body>
 </html>

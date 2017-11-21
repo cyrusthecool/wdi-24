@@ -1,0 +1,12 @@
+<h2>Edit Planet</h2>
+
+<form action="<%= planet_path(@planet.id) %>" method="post">
+  Name: <input type="text" name="name" value="<%= @planet.name %>" autofocus>
+  Image: <input type="url" name="image" value="<%= @planet.image %>">
+  Orbit: <input type="number" name="orbit" value="<%= @planet.orbit %>">
+  Diameter: <input type="number" name="diameter" value="<%= @planet.diameter %>">
+  Mass: <input type="number" name="mass" value="<%= @planet.mass %>">
+  Moons: <input type="number" name="moons" value="<%= @planet.moons %>">
+
+  <button>Edit planet</button>
+</form>

@@ -1,6 +1,9 @@
 <h2><%= @planet.name %></h2>
-<%= image_tag @planet.image unless @planet.image.blank? %>
+<%= image_tag(@planet.image, :class => 'feature') unless @planet.image.blank? %>
 <p>Orbit: <%= @planet.orbit %></p>
 <p>Diameter: <%= @planet.diameter %></p>
 <p>Mass: <%= @planet.mass %></p>
 <p>Moons: <%= @planet.moons %></p>
+
+<%= link_to 'Edit planet', planet_edit_path(@planet.id) %>
+<%= button_to 'Destroy planet', planet_path(@planet.id), :method => 'delete' %>
