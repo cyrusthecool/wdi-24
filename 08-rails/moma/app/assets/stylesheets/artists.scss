@@ -1,5 +1,15 @@
 // This is just CSS, everything is normal
 
+fieldset {
+  border: none;
+}
+
+label {
+  display: inline-block;
+  min-width: 82px;
+  text-align: right;
+}
+
 .thumb {
   max-width: 10em;
 }
