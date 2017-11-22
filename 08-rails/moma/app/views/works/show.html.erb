@@ -5,3 +5,8 @@
   <li><%= @work.medium %></li>
   <li><%= @work.style %></li>
 </ul>
+
+<div class="controls">
+  <%= link_to 'Edit work', edit_work_path(@work) %>
+  <%= link_to 'Delete work', @work, :method => 'delete', :data => { :confirm => 'You sure?' } %>
+</div>

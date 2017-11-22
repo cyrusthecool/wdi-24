@@ -1,28 +1,2 @@
 <h1>New Work</h1>
-
-<%= form_for @work do |f| %>
-  <fieldset>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :year %>
-    <%= f.text_field :year %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :medium %>
-    <%= f.text_field :medium %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :style %>
-    <%= f.text_field :style %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :image %>
-    <%= f.url_field :image %>
-  </fieldset>
-  <fieldset>
-    <label></label>
-    <%= f.submit %>
-  </fieldset>
-<% end %>
+<%= render :partial => 'form' %>
