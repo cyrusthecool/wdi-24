@@ -2,6 +2,11 @@
 <%= image_tag(@artist.image, :class => 'feature') %>
 <ul>
   <li><%= @artist.nationality %></li>
-  <li><%= @artist.dob.strftime '%A, %B %e %Y' %></li>
+  <li><%= @artist.dob.strftime '%A, %B %e %Y' unless @artist.dob.nil? %></li>
   <li><%= @artist.period %></li>
 </ul>
+
+<div class="controls">
+  <%= link_to 'Edit artist', edit_artist_path(@artist) %>
+  <%= link_to 'Delete artist', @artist, :method => 'delete', :data => { :confirm => 'You sure?' } %>
+</div>
