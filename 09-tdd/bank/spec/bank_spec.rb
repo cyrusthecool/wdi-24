@@ -28,4 +28,25 @@ describe Bank do
       expect(bank.accounts['Jonesy']).to eq 200
     end
   end
+
+  describe '#withdraw' do
+    it 'withdraws an amount from a particular customer\'s account' do
+      bank.create_account 'Bazza', 100
+      bank.withdraw 'Bazza', 50
+      expect(bank.accounts['Bazza']).to eq 100-50
+    end
+
+    it 'ignores withdrawals that exceed the balance' do
+      bank.create_account 'Chanel', 1
+      bank.withdraw 'Chanel', 1_000_000
+      expect(bank.balance('Chanel')).to eq 1
+    end
+  end
+
+  describe '#balance' do
+    it 'returns the balance for some particular customer' do
+      bank.create_account 'Mad Robby', 500
+      expect(bank.balance('Mad Robby')).to eq 500
+    end
+  end
 end
