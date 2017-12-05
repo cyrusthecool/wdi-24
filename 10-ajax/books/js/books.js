@@ -1,29 +1,21 @@
-const form = document.getElementById('title-search');
-form.addEventListener('submit', function (event) {
-  event.preventDefault(); // Don't really submit the form, stay on this page.
+const fetchBook = function (e) {
+  e.preventDefault(); // Don't leave this page.
 
-  const title = document.getElementById('query').value;
-
-  // make an ajax request for that title
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState !== 4) { return; }
-
-    const info = JSON.parse( xhr.response );
-
-    if (info.totalItems === 0) {
-      alert('Title not found');
-      return;
-    }
-
+  const title = $('#query').val();
+  // $.ajax / $.get
+  $.getJSON(`https://www.googleapis.com/books/v1/volumes?q=title:${ title }`).done(function (info) {
     const cover = info.items[0].volumeInfo.imageLinks.thumbnail;
+    const $image = $('#cover');
+    $image.attr('src', cover);
+  }).done(function (info) {
     const title = info.items[0].volumeInfo.title;
+    const $image = $('#cover');
+    $image.attr('title', title);
+  }).fail(function () {
+    alert('Something bad happened');
+  });
+};
 
-    const image = document.getElementById('cover');
-    image.setAttribute('src', cover);
-    image.setAttribute('title', title);
-  }
-
-  xhr.open('GET', 'https://www.googleapis.com/books/v1/volumes?q=title:' + title);
-  xhr.send();
+$(document).ready(function () {
+  $('#title-search').on('submit', fetchBook);
 });
