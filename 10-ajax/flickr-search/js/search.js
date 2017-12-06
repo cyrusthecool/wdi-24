@@ -1,4 +1,14 @@
+const state = {
+  page: 1,
+  requestInProgress: false,
+  lastPage: false
+};
+
 const searchFlickr = function (term) {
+  if (state.requestInProgress || state.lastPage) { return; }
+
+  state.requestInProgress = true;
+
   console.log( 'Searching Flickr for:', term );
 
   const flickrURL = 'https://api.flickr.com/services/rest/?jsoncallback=?';
@@ -7,12 +17,18 @@ const searchFlickr = function (term) {
     method: 'flickr.photos.search',
     api_key: '2f5ac274ecfac5a455f38745704ad084',
     text: term,
-    format: 'json'
+    format: 'json',
+    page: state.page++
   }).done(showImages);
 }
 
 const showImages = function (results) {
   console.log( results );
+
+  if (results.photos.page >= results.photos.pages) {
+    state.lastPage = true;
+  }
+
   const generateURL = function (photo) {
     return [
       'http://farm',
@@ -32,12 +48,17 @@ const showImages = function (results) {
     const $img = $('<img/>', {src: photoURL});
     $img.appendTo('#images'); // $('#images').append($img);
   });
+
+  state.requestInProgress = false;
 }
 
 
 $(document).ready(function () {
   $('#search').on('submit', function (e) {
     e.preventDefault(); // Stay on this page, we'll do the AJAX request ourselves.
+    $('#images').empty();
+    state.page = 1;
+    state.lastPage = false;
     const query = $('#query').val();
     searchFlickr( query );
   });
@@ -49,8 +70,8 @@ $(document).ready(function () {
       return; // Don't do anything until we are within 600 pixels of the bottom of the page.
     }
 
-    console.log('nearing the bottom');
-    // Your code here.
+    const query = $('#query').val();
+    searchFlickr(query);
 
   });
 })
