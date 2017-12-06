@@ -51,3 +51,42 @@ const over40s = _(brothers).filter(function (b) {
   return b.age > 40;
 });
 console.log( over40s );
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Collections - Sorting and grouping (good for statistics) ////////////////////
+const ageOrderedBrothers = _(brothers).sortBy('age');
+console.log( ageOrderedBrothers );
+
+const scores = [1.2, 1.9, 2.4, 2.7, 1.1, 4.3];
+const groupedScores = _(scores).groupBy(function (n) {
+  return Math.floor( n );
+});
+console.log( groupedScores );
+
+////////////////////////////////////////////////////////////////////////////////
+// Collections - Predicate methods
+const data = [1, 2, 3, 4, 5];
+const allEven = _(data).every(function (n) {
+  return n % 2 === 0; // Is n even?
+});
+console.log( allEven );
+
+const someEven = _(data).some(function (n) {
+  return n % 2 === 0; // Is n even?
+});
+console.log( someEven );
+
+////////////////////////////////////////////////////////////////////////////////
+// Arrays: Find specific data
+console.log( _(data).contains(3) ); // No more -1
+console.log( _(brothers).pluck( 'vice' ) );
+
+console.log( _(brothers).max('age') );
+console.log( _(brothers).min('age') );
+
+////////////////////////////////////////////////////////////////////////////////
+// Arrays - Selecting random elements
+console.log( _(data).shuffle() );
+console.log( _(data).sample() );
+console.log( _(data).sample(2) );
