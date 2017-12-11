@@ -9,7 +9,8 @@ class Clickr extends PureComponent {
   }
 
   _incrementClicks() {
-    this.setState( { clicks: this.state.clicks + 1 } )
+    this.setState( { clicks: this.state.clicks + 1 } ); // Async?
+    this.props.everyClick( this.state.clicks );
   }
 
   render() {
