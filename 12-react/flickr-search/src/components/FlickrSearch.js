@@ -79,6 +79,7 @@ class FlickrSearch extends Component {
       ].join('');
     }
 
+    // Most of the time you'll use Axios or similar for AJAX.
     jsonp(flickrURL, flickrParams, {callback: 'jsoncallback'}).then(function (results) {
       const images = results.photos.photo.map(generateURL);
       this.setState({images: images});
