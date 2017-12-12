@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:5000/secrets.json';
+const SERVER_URL = 'http://593d3fe7.ngrok.io/secrets.json';
 
 class SecretsForm extends Component {
   constructor() {
@@ -51,7 +51,14 @@ class Secrets extends Component {
     this.state = { secrets: [] };
     this.saveSecret = this.saveSecret.bind(this);
 
-    axios.get(SERVER_URL).then( results => this.setState( {secrets: results.data} ) );
+    // The arrow function allows us to preserve the value of `this`.
+    const fetchSecrets = () => {
+      axios.get(SERVER_URL).then( results => this.setState( {secrets: results.data} ) );
+      setTimeout( fetchSecrets, 4000 ); // Recursive.
+    }
+
+    fetchSecrets();
+
   }
 
   saveSecret(s) {
@@ -66,6 +73,7 @@ class Secrets extends Component {
         <h1>Secrets</h1>
         <h2>Tell Us All Your Secrets</h2>
         <SecretsForm onSubmit={ this.saveSecret }/>
+        <hr />
         <Gallery secrets={ this.state.secrets }/>
       </div>
     );
