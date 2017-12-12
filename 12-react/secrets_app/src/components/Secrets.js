@@ -1,4 +1,9 @@
 import React, { PureComponent as Component } from 'react';
+import PropTypes from 'prop-types';
+
+import axios from 'axios';
+
+const SERVER_URL = 'http://localhost:5000/secrets.json';
 
 class SecretsForm extends Component {
   constructor() {
@@ -13,31 +18,46 @@ class SecretsForm extends Component {
   }
 
   _handleSubmit(e) {
-    e.preventDefault(); // Don't go anywhere
+    e.preventDefault(); // Don't go anywhere!
     this.props.onSubmit( this.state.content );
+    this.setState( {content: ''} ); // Reset the form.
   }
 
   render() {
     return (
       <form onSubmit={ this._handleSubmit }>
-        <textarea onChange={ this._handleChange }></textarea>
+        <textarea onChange={ this._handleChange } value={ this.state.content }></textarea>
         <input type="submit" value="Tell" />
       </form>
     );
   }
 }
 
-class Gallery extends Component {
-  render() {
-    return (
-      <h3>Gallery coming soon</h3>
-    );
-  }
+SecretsForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
+
+function Gallery(props) {
+  return (
+    <div>
+      { props.secrets.map( s => <p key={ s.id }>{ s.content }</p> ) }
+    </div>
+  );
 }
 
 class Secrets extends Component {
+  constructor() {
+    super();
+    this.state = { secrets: [] };
+    this.saveSecret = this.saveSecret.bind(this);
+
+    axios.get(SERVER_URL).then( results => this.setState( {secrets: results.data} ) );
+  }
+
   saveSecret(s) {
-    console.log('i am the Secret component and I know the secret is', s);
+    axios.post(SERVER_URL, {content: s}).then(results => {
+      this.setState({secrets: [results.data, ...this.state.secrets] })
+    });
   }
 
   render() {
@@ -45,8 +65,8 @@ class Secrets extends Component {
       <div>
         <h1>Secrets</h1>
         <h2>Tell Us All Your Secrets</h2>
-        <SecretsForm onSubmit={ this.saveSecret } />
-        <Gallery />
+        <SecretsForm onSubmit={ this.saveSecret }/>
+        <Gallery secrets={ this.state.secrets }/>
       </div>
     );
   }
