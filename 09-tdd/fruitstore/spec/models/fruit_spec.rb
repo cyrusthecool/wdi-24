@@ -35,7 +35,6 @@ RSpec.describe Fruit, type: :model do
     end
 
     it "should be kind of squishy" do
-      @pear = Fruit.new
       expect(@pear.squishy?).to eq true
       expect(@pear.squishy?).to be true
     end
