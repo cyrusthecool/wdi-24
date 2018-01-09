@@ -201,6 +201,20 @@
         9,
         null,
         null,
+        null,
+        1,
+        4,
+        4,
+        2,
+        null,
+        2,
+        null,
+        null,
+        null,
+        1,
+        1,
+        4,
+        null,
         null
       ],
       "/Users/inceptor/Projects/wdi-24/09-tdd/fruitstore/app/controllers/application_controller.rb": [
@@ -211,6 +225,9 @@
       "/Users/inceptor/Projects/wdi-24/09-tdd/fruitstore/app/models/fruit.rb": [
         1,
         1,
+        null,
+        1,
+        null,
         1,
         0,
         null,
@@ -222,6 +239,6 @@
         null
       ]
     },
-    "timestamp": 1515461656
+    "timestamp": 1515467565
   }
 }
