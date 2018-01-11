@@ -8,6 +8,11 @@
   border-radius: 0.5em;
 }
 
+.selected {
+  border-style: dashed;
+  box-shadow: 0 0 5px black;
+}
+
 .pixel {
   float: left; // Let's never speak of this again.
   width: 1em;
