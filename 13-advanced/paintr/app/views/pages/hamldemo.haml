@@ -1,0 +1,12 @@
+%h1.title.tuesday#some_id Hi Mom
+
+%h2= @random_number
+
+%div.container
+  %p
+    %span Here is a demo of some HAML features.
+  %p This is a second paragraph
+
+%ul
+  - %w{ Groucho Harpo Chico }.each do |brother|
+    %li= brother

@@ -1,0 +1,17 @@
+.swatch {
+  width: 5em;
+  height: 5em;
+  border: 1px solid black;
+  display: inline-block;
+  margin-top: 1em;
+  margin-right: 1em;
+  border-radius: 0.5em;
+}
+
+.pixel {
+  float: left; // Let's never speak of this again.
+  width: 1em;
+  height: 1em;
+  border: 1px solid black;
+  display: inline-block;
+}
