@@ -10,7 +10,13 @@ def fibonacci_i(n)
   a
 end
 
+# Very slow
 def fibonacci_r(n)
+  if n <= 2
+    1 # Base case
+  else
+    fibonacci_r(n - 1) + fibonacci_r(n - 2)
+  end
 end
 
 require 'pry'
