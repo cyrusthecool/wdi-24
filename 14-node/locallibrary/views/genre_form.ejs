@@ -1,0 +1,16 @@
+<h1>New Genre</h1>
+
+<% if (errors) { %>
+  <ol>
+  <% for (let i = 0; i < errors.length; i++) { %>
+    <li><%= errors[i].msg %></li>
+  <% } %>
+</ol>
+<% } %>
+
+<!-- a blank action submits the form back to the current URL -->
+<form action="" method="post">
+  <label for="name">Genre:</label>
+  <input type="text" id="name" name="name" placeholder="Erotic Spanish poetry">
+  <button>Save</button>
+</form>
