@@ -1,18 +1,13 @@
 import React, { PureComponent as Component } from 'react';
+import { withTracker } from 'meteor/react-meteor-data';
+
+import { Tasks } from '../api/tasks.js';
 
 import Task from './Task.js';
 
-export default class App extends Component {
-  getTasks() {
-    return [
-      { _id: 1, text: 'Task one' },
-      { _id: 2, text: 'Task two' },
-      { _id: 3, text: 'Task three' },
-    ];
-  }
-
+class App extends Component {
   renderTasks() {
-    return this.getTasks().map( (task) => (
+    return this.props.tasks.map( (task) => (
       <Task key={task._id} task={task} />
     ))
   }
@@ -30,3 +25,10 @@ export default class App extends Component {
     );
   }
 }
+
+// Higher Order Component
+export default withTracker(() => {
+  return {
+    tasks: Tasks.find({}).fetch() // equivalent to Task.all
+  }
+})(App);
