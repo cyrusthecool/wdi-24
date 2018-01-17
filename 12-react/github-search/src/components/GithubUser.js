@@ -23,6 +23,7 @@ export default class GithubUser extends Component {
       <div>
         <h1>Github User Info</h1>
         <Profile user={this.state.user} />
+        <Repositories repos={this.state.repos} />
       </div>
     );
   }
@@ -49,9 +50,26 @@ class Profile extends Component {
 
 class Repositories extends Component {
   render () {
+    if (this.props.repos === null) {
+      return (<div className="repos">Loading...</div>);
+    }
+
+    const userRepos = this.props.repos.map( (r) => {
+      return (
+        <li>
+          <a href={r.html_url} target="_blank">
+            {r.name}
+          </a>
+        </li>
+      )
+    });
+
     return (
-      <div>
-        <h1>Repos</h1>
+      <div className="repos">
+        <h3>User Repositories</h3>
+        <ul>
+          {userRepos}
+        </ul>
       </div>
     );
   }
